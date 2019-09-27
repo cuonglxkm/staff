@@ -1,7 +1,5 @@
-<form  class="form-inline md-form mr-auto mb-4">
-  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-  <button (click)="onClick($event)" class="btn btn-rounded btn-primary my-0" type="submit">Search</button>
-</form>
+<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchString">
+<button (click)="onClick()" class="btn btn-rounded btn-primary my-0" type="submit">Search</button>
 
 <table class="table">
   <thead>
@@ -14,12 +12,27 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let x of listStaff">
+    <tr *ngFor="let x of listSearch">
       <th scope="row">{{x.id}}</th>
       <td>{{x.name}}</td>
       <td>{{x.email}}</td>
       <td>{{x.phone}}</td>
       <td>{{x.address}}</td>
+      <td>
+        <a href="javascript:; " (click)="xoa(x.id)">Xóa</a>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<button nz-button (click)="showModal()"><span>Show Modal</span></button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(frm)" [nzOkText]= "'Ok'" [nzCancelText]= "'Cancel'">
+  <form #frm="ngForm" (submit)="handleOk(frm)">
+    Mã nhân viên: <input [class.border-danger]="true" name="id" ngModel type="text" placeholder="Nhập mã nhân viên" > <br>
+    Tên nhân viên: <input name="name" ngModel type="text" placeholder="Nhâp tên nhân viên" > <br>
+    Email: <input name="email" type="text" ngModel placeholder="Nhâp email" > <br>
+    Phone: <input name="phone" type="text" ngModel placeholder="Nhâp số điện thoại" > <br>
+    Địa chỉ: <input name="address" type="text" ngModel placeholder="Nhâp địa chỉ" > <br>
+    Ảnh đại diện: <input name="image" type="image" ngModel placeholder="Nhâp image" >
+  </form>
+</nz-modal >
