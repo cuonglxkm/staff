@@ -1,38 +1,66 @@
-<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchString">
-<button (click)="onClick()" class="btn btn-rounded btn-primary my-0" type="submit">Search</button>
+<div class="container py-2">
+  <!-- <div class="form-group from-inline">
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchString">
+    <button (click)="onClick()" class=" btn btn-rounded btn-primary my-0" type="submit">Search</button>
+  </div> -->
+  <div class="input-group mb-3">
+    <input [(ngModel)]="searchString" type="text" class="form-control" placeholder="Tim kiem" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <div class="input-group-append">
+      <button (click)="onClick()" class="btn btn-primary" type="button" id="button-addon2">Tim kiem</button>
+    </div>
+  </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Mã nhân viên</th>
-      <th scope="col">Tên nhân viên</th>
-      <th scope="col">Mail</th>
-      <th scope="col">Số điện thoại</th>
-      <th scope="col">Địa chỉ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let x of listSearch">
-      <th scope="row">{{x.id}}</th>
-      <td>{{x.name}}</td>
-      <td>{{x.email}}</td>
-      <td>{{x.phone}}</td>
-      <td>{{x.address}}</td>
-      <td>
-        <a href="javascript:; " (click)="xoa(x.id)">Xóa</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table">
+    <thead>
+      <tr class="table-danger">
+        <th scope="col">Mã nhân viên</th>
+        <th scope="col">Tên nhân viên</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Số điện thoại</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of listSearch">
+        <th scope="row">{{x.id}}</th>
+        <td>{{x.name}}</td>
+        <td>{{x.email}}</td>
+        <td>{{x.phone}}</td>
+        <td>{{x.address}}</td>
+        <td>
+          <a href="javascript:; " (click)="xoa(x.id)">Xóa</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<button nz-button (click)="showModal()"><span>Show Modal</span></button>
-<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk(frm)" [nzOkText]= "'Ok'" [nzCancelText]= "'Cancel'">
-  <form #frm="ngForm" (submit)="handleOk(frm)">
-    Mã nhân viên: <input [class.border-danger]="true" name="id" ngModel type="text" placeholder="Nhập mã nhân viên" > <br>
-    Tên nhân viên: <input name="name" ngModel type="text" placeholder="Nhâp tên nhân viên" > <br>
-    Email: <input name="email" type="text" ngModel placeholder="Nhâp email" > <br>
-    Phone: <input name="phone" type="text" ngModel placeholder="Nhâp số điện thoại" > <br>
-    Địa chỉ: <input name="address" type="text" ngModel placeholder="Nhâp địa chỉ" > <br>
-    Ảnh đại diện: <input name="image" type="image" ngModel placeholder="Nhâp image" >
-  </form>
-</nz-modal >
+  <button nz-button (click)="showModal()"><span>Show Modal</span></button>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Them nhan vien" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkText]= "'Ok'" [nzCancelText]= "'Cancel'">
+        <div class="form-row">
+          <div class="col-12 mb-3">
+            <input  [ngClass]="style.id" name="id" [(ngModel)]="newStaff.id" #id="ngModel" (blur)="onValid(id)" type="text" class="form-control" placeholder="Ma nhan vien">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 mb-3">
+            <input [ngClass]="style.name" name="name" [(ngModel)]="newStaff.name" #name="ngModel" (blur)="onValid(name)" type="text" class="form-control" placeholder="Ten nhan vien">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 mb-3">
+            <input [ngClass]="style.email" name="email" [(ngModel)]="newStaff.email" #email="ngModel" (blur)="onValid(email)" type="text" class="form-control" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 mb-3">
+            <input [ngClass]="style.phone" name="phone" [(ngModel)]="newStaff.phone" #phone="ngModel" (blur)="onValid(phone)" type="text" class="form-control" placeholder="So dien thoai">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-12 mb-3">
+            <input [ngClass]="style.address" name="address" [(ngModel)]="newStaff.address" #address="ngModel" (blur)="onValid(address)" type="text" class="form-control" placeholder="Dia chi">
+          </div>
+        </div>
+    </nz-modal >
+</div>
